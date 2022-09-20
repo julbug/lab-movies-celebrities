@@ -4,22 +4,23 @@
 <form action="/movies/{{movie.id}}" method="post">
 
 <label for ="title">Title</label>
-    <input type:"text" name="title" value={{movie.title}} />
+    <input type:"text" name="title" value="{{movie.title}}">
 
 <label for ="genre">Genre</label>
-    <input type:"text" name="genre" value={{movie.genre}} />
+    <input type:"text" name="genre" value="{{movie.genre}}">
 
 <label for ="plot">Plot</label>    
-     <input type:"text" name="plot" value={{movie.plot}} />
+     <input type:"text" name="plot" value="{{movie.plot}}">
 
 
 <label for="cast">Cast</label>
-    <select name="cast" multiple>
+    <select name="cast" id="cast" select= multiple >
         {{#each celebrities}}]
-        <option value={{this._id}}>{{this.name}}</option>
+        <option value="{{this._id}}">{{this.name}}</option>
         {{/each}}
     </select>
 
-<button type ="submit">Submit</button>
+
+<button type ="submit">Edit</button>
 </form>
 </div>

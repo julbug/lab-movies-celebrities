@@ -1,12 +1,11 @@
-<h2>Movie Details</h2>
+<h2>Celebrity Details</h2>
 <div>
-    <h3>{{movie.title}}</h3>
-    <p>Genre: {{movie.genre}}</p>
-    <p>Plot: {{move.plot}}</p>
+    <h3>{{celebrity.name}}</h3>
 </div>
 <div>
 <ul>
-    {{#each movie.cast}}
+
+    {{#each celebrities.name}} 
     <li>Name: {{this.name}}</li>
     <li>Occupation: {{this.occupation}}</li>
     <li>Catch Phrase: {{this.catchPhrase}}</li>
@@ -22,4 +21,4 @@
 <form action="/movies/{{movie.id}}/edit" method="get">
 <button type ="submit">Edit</button>
 </form>
-</div>
+</div> 

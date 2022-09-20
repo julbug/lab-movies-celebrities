@@ -4,28 +4,17 @@
     <div>
         <br>
         <br>
-        <li>{{this.name}}</li>
-        <li>{{this.occupation}}</li>
-        <li>{{this.catchPhrase}}</li>
+
+        <p>Name: {{this.name}}</p> 
+        <p>Occupation: {{this.occupation}}</p>
+        <p>Catch Phrase: {{this.catchPhrase}}</p>
         
-        <a class="edit" href="/celebrities/{{this.id}}/edit">Edit</a>
     </div>
-      <form action="/celebrities/{{this.id}}/delete" method="POST">
+  
+      <form action="/celebrities/{{this.id}}/delete" method="post">
         <button  class="delete" type="submit">Delete</button>
       </form>
+      <br>
     {{/each}}
 
-    {{!-- {{#each celebrities}}
-
-    <div>
-
-        <h3>{{this.name}}</h3>
-        <p class="p-1"> {{this.occupation}}</p>
-        <p class="p-2">{{this.catchPhrase}}</p>
-        <a class="edit" href="/celebrities/{{this.id}}/edit">Edit</a>
-    </div>
-
-       <form action="/celebrities/{{this.id}}/delete" method="POST">
-        <button  class="delete" type="submit">Delete</button>
-       </form>
-{{/each}} --}}
+  
