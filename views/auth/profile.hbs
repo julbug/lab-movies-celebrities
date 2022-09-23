@@ -1,0 +1,17 @@
+<h1>User Profile</h1>
+<br>
+
+<h3>Username: {{theUser.username}}</h3>
+
+<br>
+<h5>Liked Movies:</h5>
+
+{{#each theUser.likedMovies}}
+
+<div>
+
+<a href="/movies/{{this.id}}">{{this.title}}</a>
+
+</div>
+
+{{/each}}

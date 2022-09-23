@@ -3,6 +3,7 @@ const router = require("express").Router();
 // all your routes here
 const Movie = require('../models/Movie.model');
 const Celebrity = require('../models/Celebrity.model');
+const User = require('../models/User.model');
 
 //------------------------------------------- CREATE MOVIES ROUTES
   router.get('/movies/create', (req, res, next)=>{
@@ -115,24 +116,22 @@ router.post('/movies/:id', (req, res, next)=>{
    
    })
 
+});
+
+//------------------------POST ROUTE FOR LIKING A MOVIE
+
+router.post('/movies/:id/like', (req, res, next)=>{
+
+    User.findByIdAndUpdate(req.session.currentlyLoggedIn._id,
+        {$addToSet: {likedMovies: req.params.id}})
+        
+        .then((result)=>{
+            res.redirect('/movies');
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
 })
-
-
-  //////////////////////////////////////////////////////
-  router.post("/:id", (req, res) => {
-    const { title, genre, plot, cast } = req.body;
-  
-    const newMovie = {
-      title: title,
-      genre: genre,
-      plot: plot,
-      cast: cast,
-    };
-  
-    Movie.findByIdAndUpdate(`${req.params.id}`, newMovie)
-      .then(res.redirect(req.baseUrl + "/movies"))
-      .catch((err) => console.log(err));
-  });
-
+;
 
 module.exports = router;

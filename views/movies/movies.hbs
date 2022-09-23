@@ -8,6 +8,11 @@
         <a href="/movies/{{this.id}}"><p>{{this.title}}</p></a>
 
         <a class="edit" href="/movies/{{this.id}}/edit">Edit</a>
+        <br>
+
+        <form action="/movies/{{this.id}}/like" method="post">
+       <button  class="like" type="submit">Like ❤️ </button>
+       </form>
 
         <form action="/movies/{{this.id}}/delete" method="post">
         <button  class="delete" type="submit">Delete</button>
