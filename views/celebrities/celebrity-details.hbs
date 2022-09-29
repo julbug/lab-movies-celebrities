@@ -1,24 +1,19 @@
 <h2>Celebrity Details</h2>
+
+<br>
+
 <div>
     <h3>{{celebrity.name}}</h3>
-</div>
-<div>
-<ul>
-
-    {{#each celebrities.name}} 
-    <li>Name: {{this.name}}</li>
-    <li>Occupation: {{this.occupation}}</li>
-    <li>Catch Phrase: {{this.catchPhrase}}</li>
-    {{/each}}
-</ul>
+    <p>Occupation: {{celebrity.occupation}}</p>
+    <p>Catch Phrase: {{celebrity.catchPhrase}}</p>
 </div>
 
-<div>
-<form action="/movies/{{movie.id}}/delete" method="post">
-<button type ="submit">Delete</button>
-</form>
 
-<form action="/movies/{{movie.id}}/edit" method="get">
-<button type ="submit">Edit</button>
-</form>
-</div> 
+ {{#if theUser}}
+        <a class="edit" href="/celebrities/{{this.id}}/edit">Edit</a>
+        
+        <form action="/celebrities/{{this.id}}/delete" method="post">
+        <button  class="delete" type="submit">Delete</button>
+        </form>
+
+{{/if}}

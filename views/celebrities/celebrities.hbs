@@ -1,20 +1,39 @@
-<h2>Celebrities</h2>
+    <h2>Celebrities</h2>
+
+    {{#if theUser}}
 
     {{#each celebrities}}
-    <div>
-        <br>
-        <br>
 
-        <p>Name: {{this.name}}</p> 
-        <p>Occupation: {{this.occupation}}</p>
-        <p>Catch Phrase: {{this.catchPhrase}}</p>
+   
+    <br>
         
-    </div>
-  
-      <form action="/celebrities/{{this.id}}/delete" method="post">
+    <a href="/celebrities/{{this.id}}"><p>{{this.name}}</p></a>
+
+    <a class="edit" href="/celebrities/{{this.id}}/edit">Edit</a>
+    
+    <br>
+    
+    <form action="/celebrities/{{this.id}}/delete" method="post">
         <button  class="delete" type="submit">Delete</button>
-      </form>
-      <br>
+    </form>
+
+    <br>
+
     {{/each}}
+
+    {{else}} 
+
+    {{#each celebrities}}
+        <br>
+        
+       <a href="/celebrities/{{this.id}}"><p>{{this.name}}</p></a>
+       
+        <br>
+        
+    {{/each}}
+    
+    {{/if}} 
+
+
 
   

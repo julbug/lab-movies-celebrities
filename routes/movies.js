@@ -52,8 +52,9 @@ router.get('/movies/:id', (req, res, next) => {
   console.log(req.params.id)
  Movie.findById(req.params.id).populate('cast')
   .then((movieFromDb) => {
-    console.log(movieFromDb)
-  res.render('movies/movie-details',{movie: movieFromDb})
+    User.find({likes: req.params.id}).then((usersWhoLiked) => {
+        res.render('movies/movie-details',{movie: movieFromDb, likes: usersWhoLiked.length})
+    })
   }).catch((err)=> {
       console.log({err})
   })

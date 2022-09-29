@@ -6,3 +6,31 @@ body {
 a {
   color: #00b7ff;
 }
+
+
+nav { 
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  display: flex;
+  width: 25%;
+  position: relative;
+  align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.error-div, .success-div{
+  font-size: 20px;
+  width: 40%;
+  margin: 30px 0;
+  margin-left: 20px;
+}
+
+.error-div{ 
+  color: red;
+}
+
+.success-div{
+  color: green;
+}

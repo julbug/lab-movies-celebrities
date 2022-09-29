@@ -41,6 +41,45 @@ router.get('/celebrities', (req, res, next) => {
     });
 })
 
+//------------------------------------------- EDIT CELEBRITIES ROUTE
+router.get('/celebrities/:id/edit', (req, res, next) => {
+    Celebrity.findById(req.params.id)
+    .then(celebritiesFromDb => {
+        console.log(celebritiesFromDb);
+        res.render('celebrities/edit-celebrity', celebritiesFromDb);
+}).catch(err => {console.log({err})});
+})
+
+router.post('/celebrities/:id', (req, res, next)=>{
+    Celebrity.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        occupation: req.body.occupation,
+        catchPhrase: req.body.catchPhrase,
+        
+    }).then((response)=>{
+        
+        res.redirect('/celebrities');
+
+    }).catch((err)=>{
+        console.log(err);
+    })
+
+});
+
+//------------------------------------------- DISPLAY CELEBRITIES DETAILS ROUTE
+
+router.get('/celebrities/:id', (req, res, next) => {
+    console.log(req.params.id)
+   Celebrity.findById(req.params.id)
+    .then((celebrityFromDb) => {
+      console.log(celebrityFromDb)
+    res.render('celebrities/celebrity-details',{celebrity: celebrityFromDb})
+    }).catch((err)=> {
+        console.log({err})
+    })
+  
+    })
+  
 //------------------------------------------- DELETE CELEBRITIES ROUTE
 router.post('/celebrities/:id/delete', (req, res, next)=>{
 
@@ -53,7 +92,6 @@ router.post('/celebrities/:id/delete', (req, res, next)=>{
     })
 
 });
-
 
 
 

@@ -3,6 +3,7 @@
     <h3>{{movie.title}}</h3>
     <p>Genre: {{movie.genre}}</p>
     <p>Plot: {{move.plot}}</p>
+    <h4>Likes: {{likes}}</h4>
 </div>
 <div>
 <ul>
@@ -14,12 +15,12 @@
 </ul>
 </div>
 
-<div>
-<form action="/movies/{{movie.id}}/delete" method="post">
-<button type ="submit">Delete</button>
-</form>
 
-<form action="/movies/{{movie.id}}/edit" method="get">
-<button type ="submit">Edit</button>
-</form>
-</div>
+ {{#if theUser}}
+        <a class="edit" href="/movies/{{this.id}}/edit">Edit</a>
+        
+        <form action="/movies/{{this.id}}/delete" method="post">
+        <button  class="delete" type="submit">Delete</button>
+        </form>
+
+{{/if}}
