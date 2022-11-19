@@ -33,11 +33,10 @@ router.get('/celebrities', (req, res, next) => {
         data = {
             celebrities: celebritiesFromDb
         }
-        res.render('celebrities/celebrities', data);
+        res.json(data);
     })
     .catch((err) => {
-        console.log('Error while creating celebrity');
-        next(err);
+        res.json(err)
     });
 })
 
@@ -73,9 +72,9 @@ router.get('/celebrities/:id', (req, res, next) => {
    Celebrity.findById(req.params.id)
     .then((celebrityFromDb) => {
       console.log(celebrityFromDb)
-    res.render('celebrities/celebrity-details',{celebrity: celebrityFromDb})
+    res.json({celebrity: celebrityFromDb})
     }).catch((err)=> {
-        console.log({err})
+        res.json(err)
     })
   
     })

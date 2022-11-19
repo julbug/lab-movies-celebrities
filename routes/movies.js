@@ -6,16 +6,16 @@ const Celebrity = require('../models/Celebrity.model');
 const User = require('../models/User.model');
 
 //------------------------------------------- CREATE MOVIES ROUTES
-  router.get('/movies/create', (req, res, next)=>{
-      Celebrity.find()
-      .then((celebritiesFromDb) => {
-          console.log({celebritiesFromDb})
-          data = {
-              celebrities: celebritiesFromDb
-          }
-      })
-   res.render('movies/new-movie', data);
-  });
+//   router.get('/movies/create', (req, res, next)=>{
+//       Celebrity.find()
+//       .then((celebritiesFromDb) => {
+//           console.log({celebritiesFromDb})
+//           data = {
+//               celebrities: celebritiesFromDb
+//           }
+//       })
+//    res.render('movies/new-movie', data);
+//   });
 
 
   router.post('/movies/create', (req, res, next) => {
@@ -34,11 +34,10 @@ const User = require('../models/User.model');
 router.get('/movies', (req, res, next) => {
     Movie.find()
     .then((movies) => {
-        res.render('movies/movies', {movies});
+        res.json(movies);
     })
     .catch((err) => {
-        console.log('Error while creating a movie');
-        next(err);
+        res.json(err);
     });
 });
 
@@ -53,10 +52,10 @@ router.get('/movies/:id', (req, res, next) => {
  Movie.findById(req.params.id).populate('cast')
   .then((movieFromDb) => {
     User.find({likes: req.params.id}).then((usersWhoLiked) => {
-        res.render('movies/movie-details',{movie: movieFromDb, likes: usersWhoLiked.length})
+        res.json({movie: movieFromDb, likes: usersWhoLiked.length})
     })
   }).catch((err)=> {
-      console.log({err})
+        res.json(err);
   })
 
   })
@@ -121,18 +120,18 @@ router.post('/movies/:id', (req, res, next)=>{
 
 //------------------------POST ROUTE FOR LIKING A MOVIE
 
-router.post('/movies/:id/like', (req, res, next)=>{
+// router.post('/movies/:id/like', (req, res, next)=>{
 
-    User.findByIdAndUpdate(req.session.currentlyLoggedIn._id,
-        {$addToSet: {likedMovies: req.params.id}})
+//     User.findByIdAndUpdate(req.session.currentlyLoggedIn._id,
+//         {$addToSet: {likedMovies: req.params.id}})
         
-        .then((result)=>{
-            res.redirect('/movies');
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-})
-;
+//         .then((result)=>{
+//             res.redirect('/movies');
+//         })
+//         .catch((err)=>{
+//             console.log(err)
+//         })
+// })
+// ;
 
 module.exports = router;

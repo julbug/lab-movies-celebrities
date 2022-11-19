@@ -9,11 +9,18 @@ require('./db');
 // https://www.npmjs.com/package/express
 const express = require('express');
 
+//USE THIS FOR REACT
+const cors = require('cors');
+
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 const hbs = require('hbs');
 
 const app = express();
+
+//USE THIS FOR REACT
+app.use(cors());
+
 
 //==========================================
 const session = require('express-session');
@@ -73,7 +80,7 @@ app.use('/', User);
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
 
-
-
+//USE THIS FOR REACT
+app.use('*',cors());
 
 module.exports = app;
