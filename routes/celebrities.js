@@ -4,10 +4,10 @@ const router = require("express").Router();
 const Celebrity = require('../models/Celebrity.model');
 // all your routes here
 
-//------------------------------------------- CREATE CELEBRITIES ROUTES
-router.get('/celebrities/create', (req, res, next)=>{
-    res.render('celebrities/new-celebrity');
-  });
+//------------------------------------------- CREATE CELEBRITIES ROUTES (create)
+// router.get('/celebrities/create', (req, res, next)=>{
+//     res.render('celebrities/new-celebrity');
+//   });
 
 
   router.post('/celebrities/create', (req, res, next) => {
@@ -16,8 +16,8 @@ router.get('/celebrities/create', (req, res, next)=>{
 
     Celebrity.create({name, occupation, catchPhrase})
     .then((createdCelebrity) => {
-        console.log(`The celebrity ${createdCelebrity.title} has been created`);
-        res.redirect('/celebrities');
+        console.log(`The celebrity ${createdCelebrity.namne} has been created`);
+        res.json(createdCelebrity);
         // res.redirect('/celebrities/create');
     })
     .catch((err) => next(err));
@@ -25,7 +25,7 @@ router.get('/celebrities/create', (req, res, next)=>{
 });
 
 
-//------------------------------------------- DISPLAY CELEBRITIES ROUTE
+//------------------------------------------- DISPLAY CELEBRITIES ROUTE 
 router.get('/celebrities', (req, res, next) => {
     Celebrity.find()
     .then((celebritiesFromDb) => {
@@ -41,26 +41,36 @@ router.get('/celebrities', (req, res, next) => {
 })
 
 //------------------------------------------- EDIT CELEBRITIES ROUTE
+// router.get('/celebrities/:id/edit', (req, res, next) => {
+//     Celebrity.findById(req.params.id)
+//     .then(celebritiesFromDb => {
+//         console.log(celebritiesFromDb);
+//         res.render('celebrities/edit-celebrity', celebritiesFromDb);
+// }).catch(err => {console.log({err})});
+// })
+
 router.get('/celebrities/:id/edit', (req, res, next) => {
     Celebrity.findById(req.params.id)
     .then(celebritiesFromDb => {
         console.log(celebritiesFromDb);
-        res.render('celebrities/edit-celebrity', celebritiesFromDb);
+        res.json(celebritiesFromDb);
 }).catch(err => {console.log({err})});
 })
 
 router.post('/celebrities/:id', (req, res, next)=>{
+    console.log({params:req.params, body: req.body})
     Celebrity.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         occupation: req.body.occupation,
         catchPhrase: req.body.catchPhrase,
         
-    }).then((response)=>{
+    }, {new:true}).then((response)=>{
         
-        res.redirect('/celebrities');
+        res.json(response);
 
     }).catch((err)=>{
-        console.log(err);
+        console.log({err});
+        res.json({err});
     })
 
 });
@@ -91,8 +101,6 @@ router.post('/celebrities/:id/delete', (req, res, next)=>{
     })
 
 });
-
-
 
 
 module.exports = router;

@@ -5,9 +5,9 @@ const bcryptjs = require('bcryptjs');
 const Movie = require("../models/Movie.model")
 
 //================SIGN-UP
-router.get('/signup', (req, res, next) => {
-    res.render('auth/signup');
-})
+// router.get('/signup', (req, res, next) => {
+//     res.render('auth/signup');
+// })
 
 router.post('/signup', (req, res, next)=>{
     const saltRounds = 12;
@@ -26,9 +26,9 @@ router.post('/signup', (req, res, next)=>{
 });
 
 //=======================LOGIN
-router.get('/login', (req, res, next)=>{
-  res.render('auth/login');
-})
+// router.get('/login', (req, res, next)=>{
+//   res.render('auth/login');
+// })
 
 router.post('/login', (req, res, next) => {
   if (req.body.username === '' || req.body.password === '') {
@@ -67,7 +67,7 @@ router.get('/profile', (req, res, next)=>{
   User.findById(req.session.currentlyLoggedIn._id).populate("likedMovies")
   .then((theUser)=>{
     console.log(theUser);
-    res.render('auth/profile', {theUser: theUser})
+    res.json({theUser: theUser})
   })
   .catch((err)=>{
     console.log(err)
@@ -83,9 +83,9 @@ router.post('/logout', (req, res, next)=>{
 })
 
 //================ CHANGE PASSWORD
-router.get('/change-password', (req, res, next)=>{
-  res.render("auth/changepassword", {theUser: req.session.currentlyLoggedIn});
-})
+// router.get('/change-password', (req, res, next)=>{
+//   res.render("auth/changepassword", {theUser: req.session.currentlyLoggedIn});
+// })
 
 
 router.post('/new-password', (req, res, next)=>{

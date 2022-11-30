@@ -6,17 +6,6 @@ const Celebrity = require('../models/Celebrity.model');
 const User = require('../models/User.model');
 
 //------------------------------------------- CREATE MOVIES ROUTES
-//   router.get('/movies/create', (req, res, next)=>{
-//       Celebrity.find()
-//       .then((celebritiesFromDb) => {
-//           console.log({celebritiesFromDb})
-//           data = {
-//               celebrities: celebritiesFromDb
-//           }
-//       })
-//    res.render('movies/new-movie', data);
-//   });
-
 
   router.post('/movies/create', (req, res, next) => {
     const {title, genre, plot, cast} = req.body
@@ -90,7 +79,7 @@ router.get('/movies/:id/edit', (req, res, next) => {
            }
        });
 
-       res.render('movies/edit-movie', {
+       res.json('movies/edit-movie', {
            myCelebrities: myCelebrities,
            otherCelebrities: otherCelebrities,
            movie: movieFromDB,
@@ -109,7 +98,7 @@ router.post('/movies/:id', (req, res, next)=>{
        plot: req.body.plot,
        cast: req.body.cast
    }).then((response)=>{
-       res.redirect('/movies');
+       res.json(response);
    }).catch((err)=>{
        console.log(err);
 
